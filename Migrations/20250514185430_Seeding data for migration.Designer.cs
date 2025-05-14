@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using application2.data;
 
@@ -11,9 +12,11 @@ using application2.data;
 namespace application2.Migrations
 {
     [DbContext(typeof(WalksDbContext))]
-    partial class WalksDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250514185430_Seeding data for migration")]
+    partial class Seedingdataformigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +58,7 @@ namespace application2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444444"),
+                            Id = new Guid("675b1099-e02e-4b4e-b2ea-9ccd95aef145"),
                             Area = 3287263.0,
                             Code = "IN",
                             Lat = 20.593699999999998,
@@ -65,7 +68,7 @@ namespace application2.Migrations
                         },
                         new
                         {
-                            Id = new Guid("55555555-5555-5555-5555-555555555555"),
+                            Id = new Guid("896e721d-e8fc-454f-bfd6-9d11f43f5ffe"),
                             Area = 9833517.0,
                             Code = "US",
                             Lat = 37.090200000000003,
@@ -120,17 +123,17 @@ namespace application2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Id = new Guid("e94f43fb-f617-494b-80f7-ab04a9d8a866"),
                             Code = "Easy"
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222222"),
+                            Id = new Guid("2e9761ff-290c-4284-80fc-355f07c4b18c"),
                             Code = "Medium"
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333333"),
+                            Id = new Guid("2be547f5-a3f7-4a98-9fe1-7e6a53fc939d"),
                             Code = "Hard"
                         });
                 });

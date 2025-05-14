@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using application2.Models.Domain;
+using application2.Models.DTO;
+using AutoMapper;
 
 namespace application2.profiles
 {
@@ -6,8 +8,13 @@ namespace application2.profiles
     {
         public AutoMapperProfiles()
         {
-            CreateMap<Models.Domain.Region, Models.DTO.Region>()
-                .ReverseMap();
+            CreateMap<Models.Domain.Region, Models.DTO.Region>().ReverseMap();
+            CreateMap<AddRegionRequest, Models.DTO.Region>().ReverseMap();
+            CreateMap<UpdateRegionRequest, Models.DTO.Region>().ReverseMap();
+            CreateMap<Walk, Models.DTO.AddWalkRequest>().ReverseMap();
+            CreateMap<Walk, Models.DTO.WalkDto>().ReverseMap();
+
+
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using application2.data;
 
@@ -11,9 +12,11 @@ using application2.data;
 namespace application2.Migrations
 {
     [DbContext(typeof(WalksDbContext))]
-    partial class WalksDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250514205155_Seeding data for walk difficulty migration")]
+    partial class Seedingdataforwalkdifficultymigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,28 +54,6 @@ namespace application2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Regions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("44444444-4444-4444-4444-444444444444"),
-                            Area = 3287263.0,
-                            Code = "IN",
-                            Lat = 20.593699999999998,
-                            Long = 78.962900000000005,
-                            Name = "India",
-                            Population = 1393409038L
-                        },
-                        new
-                        {
-                            Id = new Guid("55555555-5555-5555-5555-555555555555"),
-                            Area = 9833517.0,
-                            Code = "US",
-                            Lat = 37.090200000000003,
-                            Long = -95.712900000000005,
-                            Name = "United States",
-                            Population = 331893745L
-                        });
                 });
 
             modelBuilder.Entity("application2.Models.Domain.Walk", b =>
@@ -120,17 +101,17 @@ namespace application2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Id = new Guid("6c4bec8a-2f02-4e33-8e55-4ddf308b731e"),
                             Code = "Easy"
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222222"),
+                            Id = new Guid("09b1f232-6491-43cf-82af-7461a9b8c146"),
                             Code = "Medium"
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333333"),
+                            Id = new Guid("c56cad60-8e0d-42c9-871c-c0ac677b333b"),
                             Code = "Hard"
                         });
                 });

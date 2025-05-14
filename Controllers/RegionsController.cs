@@ -1,4 +1,5 @@
-﻿using application2.Repositories;
+﻿using application2.Models.DTO;
+using application2.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -81,18 +82,20 @@ namespace application2.Controllers
 
             // Convert back to DTO
 
-            var regionDTO = new Models.DTO.Region
-            {
-                Id = region.Id,
-                Code = region.Code,
-                Area = region.Area,
-                Lat = region.Lat,
-                Long = region.Long,
-                Name = region.Name,
-                Population = region.Population
-            };
+            var addingRegionRequest = mapper.Map<List<AddRegionRequest>>(region);
 
-            return CreatedAtAction(nameof(GetRegionAsync), new { id = regionDTO.Id }, regionDTO);
+            // var regionDTO = new Models.DTO.Region
+            //{
+            //    Id = region.Id,
+            //    Code = region.Code,
+            //    Area = region.Area,
+            //    Lat = region.Lat,
+            //    Long = region.Long,
+            //    Name = region.Name,
+            //    Population = region.Population
+            //};
+
+            return CreatedAtAction(nameof(GetRegionAsync), new { id = region.Id }, addingRegionRequest);
         }
 
         [HttpDelete]
@@ -109,16 +112,18 @@ namespace application2.Controllers
             }
 
             // Convert response back to DTO
-            var regionDTO = new Models.DTO.Region
-            {
-                Id = region.Id,
-                Code = region.Code,
-                Area = region.Area,
-                Lat = region.Lat,
-                Long = region.Long,
-                Name = region.Name,
-                Population = region.Population
-            };
+            var regionDTO = mapper.Map<List<Models.DTO.Region>>(region);
+
+            //var regionDTO = new Models.DTO.Region
+            //{
+            //    Id = region.Id,
+            //    Code = region.Code,
+            //    Area = region.Area,
+            //    Lat = region.Lat,
+            //    Long = region.Long,
+            //    Name = region.Name,
+            //    Population = region.Population
+            //};
 
 
             // return Ok response
@@ -152,20 +157,22 @@ namespace application2.Controllers
             }
 
             // Convert Domain back to DTO
-            var regionDTO = new Models.DTO.Region
-            {
-                Id = region.Id,
-                Code = region.Code,
-                Area = region.Area,
-                Lat = region.Lat,
-                Long = region.Long,
-                Name = region.Name,
-                Population = region.Population
-            };
+
+            var updatingRegionRequest = mapper.Map<List<UpdateRegionRequest>>(region);
+            //var regionDTO = new Models.DTO.Region
+            //{
+            //    Id = region.Id,
+            //    Code = region.Code,
+            //    Area = region.Area,
+            //    Lat = region.Lat,
+            //    Long = region.Long,
+            //    Name = region.Name,
+            //    Population = region.Population
+            //};
 
 
             // Return Ok response
-            return Ok(regionDTO);
+            return Ok(updatingRegionRequest);
         }
     }
 }
