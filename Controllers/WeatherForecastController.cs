@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace application2.Controllers
+// doubt why we need async and if i am using db.context why not using async there?
 {
     [ApiController]
     [Route("[controller]")]
@@ -25,7 +26,7 @@ namespace application2.Controllers
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)]  
             })
             .ToArray();
         }

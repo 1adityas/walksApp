@@ -1,5 +1,6 @@
 ﻿using application2.data;
 using application2.Models.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace application2.Repositories
 {
@@ -17,24 +18,47 @@ namespace application2.Repositories
             return walk;
         }
 
-        public Task<Walk> DeleteAsync(Guid id)
+        public async Task<Walk?> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var existingWalk = await dbContext.Walks.FirstOrDefaultAsync(w => w.Id == id);
+            if (existingWalk == null)
+            {
+                return null;
+            }
+
+            dbContext.Walks.Remove(existingWalk);
+            await dbContext.SaveChangesAsync();
+            return existingWalk;
         }
 
-        public Task<IEnumerable<Walk>> GetAllAsync()
+        public async Task<List<Walk>> GetAllAsync()
         {
-            throw new NotImplementedException();
+             return await dbContext.Walks.Include("Difficulty").Include("Region ").ToListAsync();
         }
 
-        public Task<Walk> GetAsync(Guid id)
+        public async Task<Walk> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return await dbContext.Walks
+                .Include("Difficulty")
+                .Include("Region")
+                .FirstOrDefaultAsync(w => w.Id == id);
         }
 
-        public Task<Walk> UpdateAsync(Guid id, Walk walk)
+        public async Task<Walk?> UpdateAsync(Guid id, Walk walk)
         {
-            throw new NotImplementedException();
+            var existingWalk = await dbContext.Walks.FirstOrDefaultAsync(w => w.Id == id);
+            if (existingWalk == null)
+            {
+                return await Task.FromResult<Walk?>(null);
+            }
+            existingWalk.Name = walk.Name;
+            existingWalk.Length = walk.Length;
+            existingWalk.RegionId = walk.RegionId;
+            existingWalk.WalkDifficultyId = walk.WalkDifficultyId;
+
+            await dbContext.SaveChangesAsync();
+            return existingWalk;
+
         }
     }
 }
