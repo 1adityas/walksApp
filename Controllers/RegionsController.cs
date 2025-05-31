@@ -1,12 +1,14 @@
 ﻿using application2.Models.DTO;
 using application2.Repositories;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace application2.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    //[Authorize]
     public class RegionsController : Controller
     {
         private readonly IRegionRepository regionRepository;
@@ -19,6 +21,8 @@ namespace application2.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Reader")]
+
         public async Task<IActionResult> GetAllRegionsAsync()
         {
             var regions = await regionRepository.GetAllAsync();
@@ -49,6 +53,7 @@ namespace application2.Controllers
         [HttpGet]
         [Route("{id:guid}")]
         [ActionName("GetRegionAsync")]
+        [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetRegionAsync(Guid id)
         {
             var region = await regionRepository.GetAsync(id);
@@ -64,6 +69,8 @@ namespace application2.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
+
         public async Task<IActionResult> AddRegionAsync(Models.DTO.AddRegionRequest addRegionRequest)
         {
             // Request(DTO) to Domain model
@@ -100,6 +107,7 @@ namespace application2.Controllers
 
         [HttpDelete]
         [Route("{id:guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteRegionAsync(Guid id)
         {
             // Get region from database
@@ -132,6 +140,8 @@ namespace application2.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
+        [Authorize(Roles = "Writer")]
+
         public async Task<IActionResult> UpdateRegionAsync([FromRoute] Guid id, [FromBody] Models.DTO.UpdateRegionRequest updateRegionRequest)
         {
             // Convert DTO to Domain model
