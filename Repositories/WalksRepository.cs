@@ -33,13 +33,13 @@ namespace application2.Repositories
 
         public async Task<List<Walk>> GetAllAsync()
         {
-             return await dbContext.Walks.Include("Difficulty").Include("Region ").ToListAsync();
+             return await dbContext.Walks.Include("WalkDifficulty").Include("Region").ToListAsync();
         }
 
         public async Task<Walk> GetById(Guid id)
         {
             return await dbContext.Walks
-                .Include("Difficulty")
+                .Include("WalkDifficulty")
                 .Include("Region")
                 .FirstOrDefaultAsync(w => w.Id == id);
         }

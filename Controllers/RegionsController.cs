@@ -8,7 +8,7 @@ namespace application2.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    //[Authorize]
+    ////[Authorize]
     public class RegionsController : Controller
     {
         private readonly IRegionRepository regionRepository;
@@ -21,7 +21,7 @@ namespace application2.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Reader")]
+        ////[Authorize(Roles = "Reader")]
 
         public async Task<IActionResult> GetAllRegionsAsync()
         {
@@ -53,7 +53,7 @@ namespace application2.Controllers
         [HttpGet]
         [Route("{id:guid}")]
         [ActionName("GetRegionAsync")]
-        [Authorize(Roles = "Reader")]
+        ////[Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetRegionAsync(Guid id)
         {
             var region = await regionRepository.GetAsync(id);
@@ -69,7 +69,7 @@ namespace application2.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
 
         public async Task<IActionResult> AddRegionAsync(Models.DTO.AddRegionRequest addRegionRequest)
         {
@@ -89,7 +89,7 @@ namespace application2.Controllers
 
             // Convert back to DTO
 
-            var addingRegionRequest = mapper.Map<List<AddRegionRequest>>(region);
+            var addingRegionRequest = mapper.Map<AddRegionRequest>(region);
 
             // var regionDTO = new Models.DTO.Region
             //{
@@ -107,7 +107,7 @@ namespace application2.Controllers
 
         [HttpDelete]
         [Route("{id:guid}")]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteRegionAsync(Guid id)
         {
             // Get region from database
@@ -120,7 +120,7 @@ namespace application2.Controllers
             }
 
             // Convert response back to DTO
-            var regionDTO = mapper.Map<List<Models.DTO.Region>>(region);
+            var regionDTO = mapper.Map<Models.DTO.Region>(region);
 
             //var regionDTO = new Models.DTO.Region
             //{
@@ -140,7 +140,7 @@ namespace application2.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
 
         public async Task<IActionResult> UpdateRegionAsync([FromRoute] Guid id, [FromBody] Models.DTO.UpdateRegionRequest updateRegionRequest)
         {

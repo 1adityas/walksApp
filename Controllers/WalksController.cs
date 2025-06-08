@@ -1,4 +1,5 @@
 ﻿using application2.Models.Domain;
+using application2.Models.DTO;
 using application2.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,6 @@ namespace application2.Controllers
             this.walksRepository = walksRepository;
             this.mapper = mapper;
         }
-
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Models.DTO.AddWalkRequest addWalkRequest)
         {
@@ -33,16 +33,15 @@ namespace application2.Controllers
             await walksRepository.CreateAsync(walk);
             // Map the added walk back to the DTO
 
-
             return Ok(walk);
         }
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
-            // Get all walks from the repository
+            // Get all walks from the epository
             var walks = await walksRepository.GetAllAsync();
             // Map the domain models to DTOs
-            var walkDTOs = mapper.Map<List<Models.Domain.Walk>>(walks);
+            var walkDTOs = mapper.Map<List<WalkDto>>(walks);
             return Ok(walkDTOs);
         }
 
@@ -57,7 +56,7 @@ namespace application2.Controllers
                 return NotFound();
             }
             // Map the domain model to a DTO
-            var walkDTO = mapper.Map<Walk>(walk);
+            var walkDTO = mapper.Map<WalkDto>(walk);
             return Ok(walkDTO);
         }
 
